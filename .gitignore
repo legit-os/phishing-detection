@@ -8,3 +8,11 @@ wheels/
 
 # Virtual environments
 .venv
+data
+dashboard_runs
+saved.txt
+
+dashboard_runs/
+*.py[cod]
+.ipynb_checkpoints/
+config.yaml.lock

@@ -3,3 +3,34 @@ datasets:
     Phishing sites dataset:
       source: G:/My Drive/URL-Phish_Dataset.csv
       metadata: {}
+analysis:
+  files:
+    correlation_matrix:
+      path: analysis/correlation_matrix.py
+      metadata:
+        fig_corr:
+          type: figure
+          path: images\correlation_matrix_fig_corr.png
+        high_corr_df:
+          type: dataframe
+          path: data\correlation_matrix_high_corr_df.json
+    feature_skewness:
+      path: analysis/feature_skewness.py
+      metadata:
+        skew_summary_df:
+          type: dataframe
+          path: data\feature_skewness_skew_summary_df.json
+        fig_skew:
+          type: figure
+          path: images\feature_skewness_fig_skew.png
+    outlier_detection:
+      path: analysis/outlier_detection.py
+      metadata:
+        fig_outliers:
+          type: figure
+          path: images\outlier_detection_fig_outliers.png
+ops:
+  files:
+    dvc_config:
+      path: .dvc/config
+      description: DVC configuration with DagsHub remote

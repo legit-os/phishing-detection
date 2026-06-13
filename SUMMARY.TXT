@@ -1,0 +1,101 @@
+Total cells with missing values: 14
+Columns with missing values: 1 / 26
+
+
+=============================================
+       TARGET CLASS DISTRIBUTION
+=============================================
+  Legitimate (label=0):  100,000 samples (85.76%)
+  Phishing (label=1):   16,600 samples (14.24%)
+=============================================
+
+Imbalance ratio: 6.02:1
+⚠️  Dataset is imbalanced - consider resampling or class weights.
+
+
+=======================================================
+          FEATURE SKEWNESS SUMMARY
+=======================================================
+
+Highly Skewed (>1.0): 19 features
+                  is_ip :   94.691
+              query_len :   37.279
+            special_cnt :   28.566
+              digit_cnt :   22.423
+              under_cnt :   19.301
+             letter_cnt :   16.067
+                amp_cnt :   15.745
+                url_len :   15.154
+               path_len :   11.691
+                 eq_cnt :   10.535
+                 qm_cnt :    9.781
+               dash_cnt :    5.901
+            digit_ratio :    5.175
+              slash_cnt :    3.162
+                tld_len :    2.061
+                  label :    2.047
+                entropy :    1.577
+                dom_len :    1.116
+           letter_ratio :   -1.026
+
+Moderate (0.5-1.0): 1 features
+                dot_cnt :    0.976
+
+Symmetric (<0.5): 3 features
+               is_https :    0.278
+             subdom_cnt :   -0.121
+             spec_ratio :   -0.178
+=======================================================
+
+
+
+⚠️  Found 11 highly correlated feature pairs (|r| > 0.7):
+  Feature 1   Feature 2  Correlation
+    url_len  letter_cnt        0.972
+     eq_cnt     amp_cnt        0.928
+special_cnt    path_len        0.782
+ letter_cnt   query_len        0.773
+    url_len   query_len        0.766
+    url_len special_cnt        0.765
+    url_len   digit_cnt        0.764
+     eq_cnt      qm_cnt        0.759
+ spec_ratio     entropy       -0.726
+  digit_cnt special_cnt        0.718
+    url_len    path_len        0.708
+
+
+Duplicate rows: 1,369 (1.17%)
+
+Unique values per feature:
+-----------------------------------
+                 url:  115,231
+             url_len:      341
+                 dom:   90,860
+             dom_len:       47
+               is_ip:        2
+                 tld:    1,257
+             tld_len:       22
+          subdom_cnt:        7
+          letter_cnt:      287
+           digit_cnt:      129
+         special_cnt:       75
+              eq_cnt:       17
+              qm_cnt:        5
+             amp_cnt:       15
+             dot_cnt:       13
+            dash_cnt:       23
+           under_cnt:       18
+        letter_ratio:    1,750
+         digit_ratio:    1,464
+          spec_ratio:    1,106
+            is_https:        2
+           slash_cnt:       19
+             entropy:   14,800
+            path_len:      175
+           query_len:      245
+               label:        2
+
+--- Low-variance features (<=2 unique values) ---
+  is_ip: [0 1]
+  is_https: [1 0]
+  label: [0 1]

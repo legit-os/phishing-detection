@@ -1,0 +1,73 @@
+[
+    {
+        "model_name": "LogisticRegression",
+        "model_path": "models\\logisticregression_20260821_145243.joblib",
+        "best_params": {
+            "C": 10.0
+        },
+        "metrics": {
+            "accuracy": 0.9449399656946826,
+            "precision": 0.8888464476699771,
+            "recall": 0.7009036144578313,
+            "f1_score": 0.7837655776355675
+        }
+    },
+    {
+        "model_name": "DecisionTree",
+        "model_path": "models\\decisiontree_20260821_145252.joblib",
+        "best_params": {
+            "max_depth": 20,
+            "min_samples_split": 5
+        },
+        "metrics": {
+            "accuracy": 0.9765866209262436,
+            "precision": 0.9397590361445783,
+            "recall": 0.8927710843373494,
+            "f1_score": 0.9156626506024096
+        }
+    },
+    {
+        "model_name": "RandomForest",
+        "model_path": "models\\randomforest_20260821_145314.joblib",
+        "best_params": {
+            "max_depth": 20,
+            "n_estimators": 100
+        },
+        "metrics": {
+            "accuracy": 0.9823756432246998,
+            "precision": 0.9581102362204724,
+            "recall": 0.9162650602409639,
+            "f1_score": 0.9367205542725173
+        }
+    },
+    {
+        "model_name": "XGBoost",
+        "model_path": "models\\xgboost_20260821_145325.joblib",
+        "best_params": {
+            "learning_rate": 0.2,
+            "max_depth": 7,
+            "n_estimators": 100
+        },
+        "metrics": {
+            "accuracy": 0.9815608919382505,
+            "precision": 0.9524107701941139,
+            "recall": 0.9162650602409639,
+            "f1_score": 0.933988332821615
+        }
+    },
+    {
+        "model_name": "LightGBM",
+        "model_path": "models\\lightgbm_20260821_145452.joblib",
+        "best_params": {
+            "learning_rate": 0.2,
+            "max_depth": -1,
+            "n_estimators": 100
+        },
+        "metrics": {
+            "accuracy": 0.9810891938250429,
+            "precision": 0.9499843701156612,
+            "recall": 0.9153614457831325,
+            "f1_score": 0.93235158766682
+        }
+    }
+]

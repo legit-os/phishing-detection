@@ -11,6 +11,8 @@ wheels/
 data
 dashboard_runs
 saved.txt
+agent.md
+agentplan.md
 
 dashboard_runs/
 *.py[cod]

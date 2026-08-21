@@ -29,8 +29,43 @@ analysis:
         fig_outliers:
           type: figure
           path: images\outlier_detection_fig_outliers.png
+    model_comparison:
+      path: analysis/model_comparison.py
+      metadata:
+        models_df:
+          type: dataframe
+          path: data\model_comparison_models_df.json
+        fig_model_comparison:
+          type: figure
+          path: images\model_comparison_fig_model_comparison.png
 ops:
   files:
     dvc_config:
       path: .dvc/config
       description: DVC configuration with DagsHub remote
+utils:
+  files: {}
+pipeline:
+  stages:
+    ingestion:
+      elements:
+        data_ingestion:
+          path: pipeline/data_ingestion.py
+    preprocessing:
+      elements:
+        data_cleaning:
+          path: pipeline/data_cleaning.py
+          depends_on:
+          - ingestion.data_ingestion
+    splitting:
+      elements:
+        data_splitting:
+          path: pipeline/data_splitting.py
+          depends_on:
+          - preprocessing.data_cleaning
+    training:
+      elements:
+        model_training:
+          path: pipeline/model_training.py
+          depends_on:
+          - splitting.data_splitting

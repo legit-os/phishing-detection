@@ -1,0 +1,43 @@
+stages:
+  ingestion:
+    cmd: uv run python pipeline/data_ingestion.py "G:/My Drive/URL-Phish_Dataset.csv" data/raw.csv
+    deps:
+      - pipeline/data_ingestion.py
+      - "G:/My Drive/URL-Phish_Dataset.csv"
+    outs:
+      - data/raw.csv
+
+  cleaning:
+    cmd: uv run python pipeline/data_cleaning.py data/raw.csv data/cleaned.csv
+    deps:
+      - pipeline/data_cleaning.py
+      - data/raw.csv
+    outs:
+      - data/cleaned.csv
+
+  splitting:
+    cmd: uv run python pipeline/data_splitting.py data/cleaned.csv data
+    deps:
+      - pipeline/data_splitting.py
+      - data/cleaned.csv
+    outs:
+      - data/train.csv
+      - data/test.csv
+      - data/cleaned_full.csv
+
+  resampling:
+    cmd: uv run python pipeline/data_resampling.py data/train.csv data/train_resampled.csv
+    deps:
+      - pipeline/data_resampling.py
+      - data/train.csv
+    outs:
+      - data/train_resampled.csv
+
+  training:
+    cmd: uv run python pipeline/model_training.py data/train_resampled.csv data/test.csv models
+    deps:
+      - pipeline/model_training.py
+      - data/train_resampled.csv
+      - data/test.csv
+    outs:
+      - models/

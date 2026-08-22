@@ -4,6 +4,7 @@ import sys
 import os
 import json
 import joblib
+import glob
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -91,6 +92,14 @@ def train_and_evaluate_models(train_path, test_path, models_dir='models'):
         }
         
         # Save model
+        # Delete old models of the same type first to prevent clutter
+        old_models = glob.glob(os.path.join(models_dir, f"{model_name.lower()}_*.joblib"))
+        for old_model in old_models:
+            try:
+                os.remove(old_model)
+            except OSError:
+                pass
+
         model_filename = f"{model_name.lower()}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.joblib"
         model_path = os.path.join(models_dir, model_filename)
         joblib.dump(best_model, model_path)
@@ -104,22 +113,16 @@ def train_and_evaluate_models(train_path, test_path, models_dir='models'):
             'metrics': metrics
         })
     
-    # Save registry
+    # Save registry (Overwrite completely so we only show the newest runs)
     registry_path = os.path.join(models_dir, 'models_registry.json')
     
-    # Merge with existing registry if it exists
-    if os.path.exists(registry_path):
-        with open(registry_path, 'r') as f:
-            existing_registry = json.load(f)
-            registry.extend(existing_registry)
-            
     with open(registry_path, 'w') as f:
         json.dump(registry, f, indent=4)
         
     print(f"\nRegistry updated at {registry_path}")
 
 if __name__ == '__main__':
-    train_path = sys.argv[1] if len(sys.argv) > 1 else 'data/train.csv'
+    train_path = sys.argv[1] if len(sys.argv) > 1 else 'data/train_resampled.csv'
     test_path = sys.argv[2] if len(sys.argv) > 2 else 'data/test.csv'
     models_dir = sys.argv[3] if len(sys.argv) > 3 else 'models'
     

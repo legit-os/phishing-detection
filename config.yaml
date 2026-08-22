@@ -32,19 +32,31 @@ analysis:
     model_comparison:
       path: analysis/model_comparison.py
       metadata:
-        models_df:
+        df:
           type: dataframe
-          path: data\model_comparison_models_df.json
-        fig_model_comparison:
+          path: data\model_comparison_df.json
+        fig:
           type: figure
-          path: images\model_comparison_fig_model_comparison.png
+          path: images\model_comparison_fig.png
 ops:
   files:
     dvc_config:
       path: .dvc/config
       description: DVC configuration with DagsHub remote
+    dvc_pipeline:
+      path: dvc.yaml
+      description: DVC pipeline configuration for data versioning and reproducible
+        runs
 utils:
-  files: {}
+  files:
+    feature_extractor:
+      path: utils/feature_extractor.py
+    phishtank_checker:
+      path: utils/phishtank_checker.py
+    content_inspector:
+      path: utils/content_inspector.py
+    domain_ssl_checker:
+      path: utils/domain_ssl_checker.py
 pipeline:
   stages:
     ingestion:
@@ -57,6 +69,9 @@ pipeline:
           path: pipeline/data_cleaning.py
           depends_on:
           - ingestion.data_ingestion
+        data_resampling:
+          path: pipeline/data_resampling.py
+          depends_on: []
     splitting:
       elements:
         data_splitting:
@@ -69,3 +84,12 @@ pipeline:
           path: pipeline/model_training.py
           depends_on:
           - splitting.data_splitting
+    inference:
+      elements:
+        inference:
+          path: pipeline/inference.py
+          depends_on:
+          - utils.phishtank_checker
+          - utils.content_inspector
+          - utils.feature_extractor
+          - utils.domain_ssl_checker

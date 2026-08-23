@@ -78,7 +78,7 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                sh 'docker-compose up -d --build --force-recreate app'
+                sh 'docker-compose -p phishing-detection up -d --build --force-recreate app'
             }
         }
     }

@@ -1,98 +1,98 @@
 schema: '2.0'
 stages:
   ingestion:
-    cmd: uv run python pipeline/data_ingestion.py "G:/My 
-      Drive/URL-Phish_Dataset.csv" data/raw.csv
+    cmd: uv run python pipeline/data_ingestion.py data/input_data.csv 
+      data/raw.csv
     deps:
-    - path: G:/My Drive/URL-Phish_Dataset.csv
+    - path: data/input_data.csv
       hash: md5
       md5: 6d3f39eb785300d0c7a8db07e9f014fd
       size: 15149338
     - path: pipeline/data_ingestion.py
       hash: md5
-      md5: 076ba26be272ff3432b6bafbdb777899
-      size: 598
+      md5: 1f2d43ff36a00a2047c60ee3962bb386
+      size: 566
     outs:
     - path: data/raw.csv
       hash: md5
-      md5: 71af05ad6fd84a40b6f836acbb3bcda3
-      size: 15354890
+      md5: dcab3bea8ca90bc05c9f9ceb7186abce
+      size: 15238289
   cleaning:
     cmd: uv run python pipeline/data_cleaning.py data/raw.csv data/cleaned.csv
     deps:
     - path: data/raw.csv
       hash: md5
-      md5: 71af05ad6fd84a40b6f836acbb3bcda3
-      size: 15354890
+      md5: dcab3bea8ca90bc05c9f9ceb7186abce
+      size: 15238289
     - path: pipeline/data_cleaning.py
       hash: md5
-      md5: a13685653f278a534f73da0b9e8a5136
-      size: 780
+      md5: 607fedf34c3662a1902bbdce7995dc0a
+      size: 757
     outs:
     - path: data/cleaned.csv
       hash: md5
-      md5: 2f8d93d9694c1d4884150b1c550f3901
-      size: 6716725
+      md5: 7389517e957f14d52f1e0a291a2b6377
+      size: 6600124
   splitting:
     cmd: uv run python pipeline/data_splitting.py data/cleaned.csv data
     deps:
     - path: data/cleaned.csv
       hash: md5
-      md5: 2f8d93d9694c1d4884150b1c550f3901
-      size: 6716725
+      md5: 7389517e957f14d52f1e0a291a2b6377
+      size: 6600124
     - path: pipeline/data_splitting.py
       hash: md5
-      md5: 34bcdf6fb6a2b3a727e00fcfb378d51e
-      size: 1098
+      md5: bea311d1fcdcfb9cd71f86005ee162fb
+      size: 1067
     outs:
     - path: data/cleaned_full.csv
       hash: md5
-      md5: 2f8d93d9694c1d4884150b1c550f3901
-      size: 6716725
+      md5: 7389517e957f14d52f1e0a291a2b6377
+      size: 6600124
     - path: data/test.csv
       hash: md5
-      md5: 52a305825f68391d52e9a601e15d1f6a
-      size: 1344288
+      md5: a0dd3f7f1fdbef329849012cddfc369b
+      size: 1320967
     - path: data/train.csv
       hash: md5
-      md5: 2f22e85d094f6593bc157db34f018300
-      size: 5372603
+      md5: 6b6e2ccf0ffa1bb13cfba8ad7ba7d3b4
+      size: 5279322
   resampling:
     cmd: uv run python pipeline/data_resampling.py data/train.csv 
       data/train_resampled.csv
     deps:
     - path: data/train.csv
       hash: md5
-      md5: 2f22e85d094f6593bc157db34f018300
-      size: 5372603
+      md5: 6b6e2ccf0ffa1bb13cfba8ad7ba7d3b4
+      size: 5279322
     - path: pipeline/data_resampling.py
       hash: md5
-      md5: 1b37bb2da3cba8bcfbe21337b56539cc
-      size: 1325
+      md5: eb47733e5fc1a2b0fece11cce772ac01
+      size: 1290
     outs:
     - path: data/train_resampled.csv
       hash: md5
-      md5: e07b7bd3ee710c6acacf06181c0fdfd2
-      size: 10208683
+      md5: 29148ab6aab810970d6fe35f2c03d081
+      size: 10048682
   training:
     cmd: uv run python pipeline/model_training.py data/train_resampled.csv 
       data/test.csv models
     deps:
     - path: data/test.csv
       hash: md5
-      md5: 52a305825f68391d52e9a601e15d1f6a
-      size: 1344288
+      md5: a0dd3f7f1fdbef329849012cddfc369b
+      size: 1320967
     - path: data/train_resampled.csv
       hash: md5
-      md5: e07b7bd3ee710c6acacf06181c0fdfd2
-      size: 10208683
+      md5: 29148ab6aab810970d6fe35f2c03d081
+      size: 10048682
     - path: pipeline/model_training.py
       hash: md5
-      md5: 48217dd34710885e7512b55eb306ced2
-      size: 4495
+      md5: b2c4214e3b9b21d7dfe1e46b17e7b57f
+      size: 4366
     outs:
     - path: models/
       hash: md5
-      md5: cf94a1220f82747d95e4e3d5c11364ee.dir
-      size: 62458647
+      md5: f166db4623aa374e04bc2f8b204d023a.dir
+      size: 62459771
       nfiles: 6

@@ -12,6 +12,6 @@ def ingest_data(filepath, output_path=None):
     return df
 
 if __name__ == '__main__':
-    filepath = sys.argv[1] if len(sys.argv) > 1 else r'G:/My Drive/URL-Phish_Dataset.csv'
+    filepath = sys.argv[1] if len(sys.argv) > 1 else 'data/input_data.csv'
     output_path = sys.argv[2] if len(sys.argv) > 2 else 'data/raw.csv'
     ingest_data(filepath, output_path)

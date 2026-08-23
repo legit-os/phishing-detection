@@ -1,9 +1,9 @@
 stages:
   ingestion:
-    cmd: uv run python pipeline/data_ingestion.py "G:/My Drive/URL-Phish_Dataset.csv" data/raw.csv
+    cmd: uv run python pipeline/data_ingestion.py data/input_data.csv data/raw.csv
     deps:
       - pipeline/data_ingestion.py
-      - "G:/My Drive/URL-Phish_Dataset.csv"
+      - data/input_data.csv
     outs:
       - data/raw.csv
 

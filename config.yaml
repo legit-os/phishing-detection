@@ -47,6 +47,15 @@ ops:
       path: dvc.yaml
       description: DVC pipeline configuration for data versioning and reproducible
         runs
+    dockerfile:
+      path: Dockerfile
+      description: Dockerfile for the Streamlit ML App
+    docker_compose:
+      path: docker-compose.yml
+      description: Docker Compose file containing Streamlit app and Jenkins
+    jenkinsfile:
+      path: Jenkinsfile
+      description: Jenkins pipeline for CI/CD and Continuous Training
 utils:
   files:
     feature_extractor:

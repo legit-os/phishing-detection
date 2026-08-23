@@ -12,8 +12,11 @@ dashboard_runs
 saved.txt
 agent.md
 agentplan.md
-data/
-models/
+data/*
+!data/*.dvc
+!data/.gitignore
+models/*
+!models/.gitignore
 
 dashboard_runs/
 *.py[cod]

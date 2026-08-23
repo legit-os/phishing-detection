@@ -29,6 +29,7 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
+                sh 'apt-get update && apt-get install -y libgomp1'
                 sh 'curl -LsSf https://astral.sh/uv/install.sh | sh'
                 sh 'uv sync'
             }

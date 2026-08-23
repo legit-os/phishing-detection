@@ -14,6 +14,8 @@ RUN uv sync
 # Stage 2: Production runtime image
 FROM python:3.14-slim
 
+RUN apt-get update && apt-get install -y libgomp1 && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Copy the local .venv folder generated in stage 1

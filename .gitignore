@@ -12,6 +12,8 @@ dashboard_runs
 saved.txt
 agent.md
 agentplan.md
+data/
+models/
 
 dashboard_runs/
 *.py[cod]

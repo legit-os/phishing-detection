@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        skipDefaultCheckout()
+    }
+
     environment {
         DOCKER_IMAGE = 'phishing-detection-app'
         JENKINS_TOKEN = credentials('dagshub-token')

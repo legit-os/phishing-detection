@@ -5,6 +5,7 @@ pipeline {
         DOCKER_IMAGE = 'phishing-detection-app'
         JENKINS_TOKEN = credentials('dagshub-token')
         GITHUB_CREDS = credentials('phish-token')
+        PATH = "/var/jenkins_home/.local/bin:${env.PATH}"
     }
 
     triggers {
@@ -20,7 +21,7 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'pip install uv'
+                sh 'curl -LsSf https://astral.sh/uv/install.sh | sh'
                 sh 'uv sync'
             }
         }

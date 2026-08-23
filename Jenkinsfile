@@ -36,8 +36,9 @@ pipeline {
 
         stage('DVC Auth & Pull') {
             steps {
-                sh 'uv run dvc remote modify origin --local auth basic'
-                sh 'uv run dvc remote modify origin --local password ${JENKINS_TOKEN}'
+                sh 'uv run dvc remote modify dagshub --local auth basic'
+                sh 'uv run dvc remote modify dagshub --local user legit-os'
+                sh 'uv run dvc remote modify dagshub --local password ${JENKINS_TOKEN}'
                 sh 'uv run dvc pull'
             }
         }

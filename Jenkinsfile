@@ -13,6 +13,14 @@ pipeline {
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                echo 'Purging corrupt temporary caches...'
+                // Deletes Jenkins' local workspace to guarantee a completely fresh download
+                cleanWs() 
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'phish-token', url: 'https://github.com/legit-os/phishing-detection.git']])

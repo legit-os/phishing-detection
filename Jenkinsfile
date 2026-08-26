@@ -48,9 +48,34 @@ pipeline {
             }
         }
         
-        stage('DVC Reproduce (Continuous Training)') {
+        stage('DVC Reproduce & Approve') {
             steps {
-                sh 'uv run dvc repro'
+                script {
+                    def approved = false
+                    def maxRetries = 3
+                    def attempt = 0
+
+                    while (!approved && attempt < maxRetries) {
+                        attempt++
+                        echo "=== Training Attempt ${attempt}/${maxRetries} ==="
+
+                        sh 'uv run dvc repro'
+                        sh 'uv run python pipeline/show_eval.py models/models_registry.json'
+
+                        try {
+                            input message: "Review the model metrics above. Do you approve these models for deployment?",
+                                  ok: 'Approve',
+                                  submitter: ''
+                            approved = true
+                            echo 'Models APPROVED — proceeding to deployment.'
+                        } catch (err) {
+                            echo "Models REJECTED (attempt ${attempt}/${maxRetries}). Re-running training..."
+                            if (attempt >= maxRetries) {
+                                error "Maximum retries (${maxRetries}) reached. Pipeline aborted."
+                            }
+                        }
+                    }
+                }
             }
         }
 
